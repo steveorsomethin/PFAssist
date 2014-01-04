@@ -68,5 +68,6 @@
     <Compile Include="Framework\CalculatedReactiveValue.cs" />
     <Compile Include="Framework\IReactiveValue.cs" />
     <Compile Include="Framework\ReactiveValueBase.cs" />
+    <Compile Include="Models\Initiative.cs" />
   </ItemGroup>
 </Project>
