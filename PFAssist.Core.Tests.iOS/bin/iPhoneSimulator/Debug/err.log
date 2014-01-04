@@ -1,35 +1,36 @@
-2014-01-04 09:51:35.214 PFAssistCoreTestsiOS[8594:1303] MonoTouch: Socket error while connecting to MonoDevelop on 127.0.0.1:10000: Connection refused
-objc[8594]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
-2014-01-04 09:51:35.739 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe1e6fa0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.742 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe56c650 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/TwitterFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.758 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe49de70 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/StoreKitFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.762 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0x143e1520 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
-2014-01-04 09:51:35.777 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe6e0c00 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/MusicLibrary.axbundle> (not loaded)
-2014-01-04 09:51:35.782 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe6ee900 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GameCenterUIFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.785 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe6fb750 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/PassKitFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.795 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe64c500 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/iAdFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.797 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe78ab30 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GameKitFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.813 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0x143eeab0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/StoreKitUI.axbundle> (not loaded)
-2014-01-04 09:51:35.830 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0x1435c6c0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/RemoteUIFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.839 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe6315c0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/SocialFramework.axbundle> (not loaded)
-2014-01-04 09:51:35.840 PFAssistCoreTestsiOS[8594:80b] Cannot find executable for CFBundle 0xe79d700 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/EventKitUIFramework.axbundle> (not loaded)
-2014-01-04 09:51:40.661 PFAssistCoreTestsiOS[8594:80b] [Runner executing:	PFAssist.Core.Tests.iOS.StatTests.TempAdjustAndScoreUpdatesTempModifier]
-2014-01-04 09:51:40.662 PFAssistCoreTestsiOS[8594:80b] [MonoTouch Version:	7.0.4]
-2014-01-04 09:51:40.662 PFAssistCoreTestsiOS[8594:80b] [iPhone Simulator:	iPhone OS v7.0.3]
-2014-01-04 09:51:40.663 PFAssistCoreTestsiOS[8594:80b] [Device Name:	iPhone Simulator]
-2014-01-04 09:51:40.664 PFAssistCoreTestsiOS[8594:80b] [Device UDID:	FFFFFFFF350EB3FAC52F4CBDA53214AE56B03A35]
-2014-01-04 09:51:40.666 PFAssistCoreTestsiOS[8594:80b] [Device Locale:	en_US]
-2014-01-04 09:51:40.671 PFAssistCoreTestsiOS[8594:80b] [Device Date/Time:	1/4/2014 9:51:40 AM]
-2014-01-04 09:51:40.672 PFAssistCoreTestsiOS[8594:80b] [Bundle:	com.your-company.PFAssist.Core.Tests.iOS]
-2014-01-04 09:51:40.784 PFAssistCoreTestsiOS[8594:80b] 	[PASS] TempAdjustAndScoreUpdatesTempModifier
-2014-01-04 09:51:40.787 PFAssistCoreTestsiOS[8594:80b] Tests run: 1 Passed: 1 Inconclusive: 0 Failed: 0 Ignored: 0
-2014-01-04 09:51:43.017 PFAssistCoreTestsiOS[8594:80b] [Runner executing:	PFAssist.Core.Tests.iOS.StatTests.ScoreUpdatesModifier]
-2014-01-04 09:51:43.017 PFAssistCoreTestsiOS[8594:80b] [MonoTouch Version:	7.0.4]
-2014-01-04 09:51:43.018 PFAssistCoreTestsiOS[8594:80b] [iPhone Simulator:	iPhone OS v7.0.3]
-2014-01-04 09:51:43.018 PFAssistCoreTestsiOS[8594:80b] [Device Name:	iPhone Simulator]
-2014-01-04 09:51:43.019 PFAssistCoreTestsiOS[8594:80b] [Device UDID:	FFFFFFFF350EB3FAC52F4CBDA53214AE56B03A35]
-2014-01-04 09:51:43.019 PFAssistCoreTestsiOS[8594:80b] [Device Locale:	en_US]
-2014-01-04 09:51:43.019 PFAssistCoreTestsiOS[8594:80b] [Device Date/Time:	1/4/2014 9:51:43 AM]
-2014-01-04 09:51:43.020 PFAssistCoreTestsiOS[8594:80b] [Bundle:	com.your-company.PFAssist.Core.Tests.iOS]
-2014-01-04 09:51:43.023 PFAssistCoreTestsiOS[8594:80b] 	[PASS] ScoreUpdatesModifier
-2014-01-04 09:51:43.025 PFAssistCoreTestsiOS[8594:80b] Tests run: 1 Passed: 1 Inconclusive: 0 Failed: 0 Ignored: 0
+2014-01-04 12:50:46.445 PFAssistCoreTestsiOS[10565:1303] MonoTouch: Socket error while connecting to MonoDevelop on 127.0.0.1:10000: Connection refused
+objc[10565]: Class AXEmojiUtilities is implemented in both /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/PrivateFrameworks/AccessibilityUtilities.framework/AccessibilityUtilities and /Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/usr/lib/libAXSpeechManager.dylib. One of the two will be used. Which one is undefined.
+2014-01-04 12:50:47.009 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe650540 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GeoServices.axbundle> (not loaded)
+2014-01-04 12:50:47.011 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe372710 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/TwitterFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.025 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe6717c0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/StoreKitFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.032 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe676170 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GameCenterUIFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.038 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe2dccc0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/PassKitFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.046 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe2e8d00 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/iAdFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.048 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe67f2b0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/GameKitFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.055 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe68a6f0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/StoreKitUI.axbundle> (not loaded)
+2014-01-04 12:50:47.058 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe37d890 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/RemoteUIFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.083 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe39b260 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/MusicLibrary.axbundle> (not loaded)
+2014-01-04 12:50:47.091 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe6a9510 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/CertUIFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.093 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe6aa870 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/SocialFramework.axbundle> (not loaded)
+2014-01-04 12:50:47.094 PFAssistCoreTestsiOS[10565:80b] Cannot find executable for CFBundle 0xe3a87e0 </Applications/Xcode.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator7.0.sdk/System/Library/AccessibilityBundles/EventKitUIFramework.axbundle> (not loaded)
+2014-01-04 12:50:48.524 PFAssistCoreTestsiOS[10565:80b] [Runner executing:	Run Everything]
+2014-01-04 12:50:48.525 PFAssistCoreTestsiOS[10565:80b] [MonoTouch Version:	7.0.4]
+2014-01-04 12:50:48.526 PFAssistCoreTestsiOS[10565:80b] [iPhone Simulator:	iPhone OS v7.0.3]
+2014-01-04 12:50:48.526 PFAssistCoreTestsiOS[10565:80b] [Device Name:	iPhone Simulator]
+2014-01-04 12:50:48.527 PFAssistCoreTestsiOS[10565:80b] [Device UDID:	FFFFFFFF414ED2E9962744FDB8DEF572A23E9644]
+2014-01-04 12:50:48.529 PFAssistCoreTestsiOS[10565:80b] [Device Locale:	en_US]
+2014-01-04 12:50:48.534 PFAssistCoreTestsiOS[10565:80b] [Device Date/Time:	1/4/2014 12:50:48 PM]
+2014-01-04 12:50:48.535 PFAssistCoreTestsiOS[10565:80b] [Bundle:	com.your-company.PFAssist.Core.Tests.iOS]
+2014-01-04 12:50:48.540 PFAssistCoreTestsiOS[10565:80b] PFAssistCoreTestsiOS
+2014-01-04 12:50:48.541 PFAssistCoreTestsiOS[10565:80b] ReactiveValueTests
+2014-01-04 12:50:48.657 PFAssistCoreTestsiOS[10565:80b] 	[PASS] CalculatedValuesAreOverridable
+2014-01-04 12:50:48.659 PFAssistCoreTestsiOS[10565:80b] 	[PASS] DownstreamValuesUpdate
+2014-01-04 12:50:48.659 PFAssistCoreTestsiOS[10565:80b] 	[PASS] MutualSubscriptionsDontDeadlock
+2014-01-04 12:50:48.661 PFAssistCoreTestsiOS[10565:80b] 	[PASS] OverriddenValuesRevertCorrectly
+2014-01-04 12:50:48.662 PFAssistCoreTestsiOS[10565:80b] ReactiveValueTests : 120 ms
+2014-01-04 12:50:48.662 PFAssistCoreTestsiOS[10565:80b] StatTests
+2014-01-04 12:50:48.667 PFAssistCoreTestsiOS[10565:80b] 	[PASS] ScoreUpdatesModifier
+2014-01-04 12:50:48.668 PFAssistCoreTestsiOS[10565:80b] 	[PASS] TempAdjustAndScoreUpdatesTempModifier
+2014-01-04 12:50:48.668 PFAssistCoreTestsiOS[10565:80b] StatTests : 6 ms
+2014-01-04 12:50:48.671 PFAssistCoreTestsiOS[10565:80b] PFAssistCoreTestsiOS : 128 ms
+2014-01-04 12:50:48.671 PFAssistCoreTestsiOS[10565:80b] Tests run: 6 Passed: 6 Inconclusive: 0 Failed: 0 Ignored: 0

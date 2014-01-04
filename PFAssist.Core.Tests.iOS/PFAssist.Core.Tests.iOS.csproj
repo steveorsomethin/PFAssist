@@ -113,6 +113,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Models\" />
+    <Folder Include="Framework\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
@@ -121,6 +122,7 @@
     <Compile Include="Main.cs" />
     <Compile Include="UnitTestAppDelegate.cs" />
     <Compile Include="Models\StatTests.cs" />
+    <Compile Include="Framework\ReactiveValueTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

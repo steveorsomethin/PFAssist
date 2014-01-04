@@ -6,6 +6,6 @@ MonoTouch.NUnitLite.dll
 MonoTouch.Dialog-1.dll
 System.Json.dll
 PFAssist.Core.iOS.dll
+System.Reactive.Interfaces.dll
 System.Reactive.Linq.dll
 System.Reactive.Core.dll
-System.Reactive.Interfaces.dll

@@ -18,21 +18,21 @@ namespace PFAssist.Core
 	{
 		public StatType Type { get; set; }
 
-		public BehaviorSubject<int> Scores { get; set; }
+		public ReactiveValue<int> Scores { get; set; }
 
-		public BehaviorSubject<int> Modifiers { get; set; }
+		public CalculatedReactiveValue<int> Modifiers { get; set; }
 
-		public BehaviorSubject<int> TempAdjusts { get; set; }
+		public ReactiveValue<int> TempAdjusts { get; set; }
 
-		public BehaviorSubject<int> TempModifiers { get; set; }
+		public CalculatedReactiveValue<int> TempModifiers { get; set; }
 
 		public Stat (StatType type)
 		{
 			this.Type = type;
-			this.Scores = new BehaviorSubject<int> (0);
-			this.Modifiers = new BehaviorSubject<int> (0);
-			this.TempAdjusts = new BehaviorSubject<int> (0);
-			this.TempModifiers = new BehaviorSubject<int> (0);
+			this.Scores = new ReactiveValue<int> ();
+			this.Modifiers = new CalculatedReactiveValue<int> ();
+			this.TempAdjusts = new ReactiveValue<int> ();
+			this.TempModifiers = new CalculatedReactiveValue<int> ();
 
 			this.Initialize ();
 		}

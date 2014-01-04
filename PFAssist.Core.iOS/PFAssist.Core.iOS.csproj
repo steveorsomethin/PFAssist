@@ -57,10 +57,16 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="Models\" />
+    <Folder Include="Framework\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Compile Include="Models\Stat.cs" />
     <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\ArmorClass.cs" />
+    <Compile Include="Framework\ReactiveValue.cs" />
+    <Compile Include="Framework\CalculatedReactiveValue.cs" />
+    <Compile Include="Framework\IReactiveValue.cs" />
+    <Compile Include="Framework\ReactiveValueBase.cs" />
   </ItemGroup>
 </Project>
