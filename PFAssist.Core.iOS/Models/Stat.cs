@@ -18,24 +18,24 @@ namespace PFAssist.Core
 	{
 		public StatType Type { get; protected set; }
 
-		public ReactiveValue<int> Scores { get; protected set; }
+		public ReactiveValue<int> Score { get; protected set; }
 
-		public CalculatedReactiveValue<int> Modifiers { get; protected set; }
+		public CalculatedReactiveValue<int> Modifier { get; protected set; }
 
-		public ReactiveValue<int> TempAdjusts { get; protected set; }
+		public ReactiveValue<int> TempAdjust { get; protected set; }
 
-		public CalculatedReactiveValue<int> TempModifiers { get; protected set; }
+		public CalculatedReactiveValue<int> TempModifier { get; protected set; }
 
 		public Stat (StatType type)
 		{
 			this.Type = type;
-			this.Scores = new ReactiveValue<int> ();
-			this.Modifiers = new CalculatedReactiveValue<int> ();
-			this.TempAdjusts = new ReactiveValue<int> ();
-			this.TempModifiers = new CalculatedReactiveValue<int> ();
+			this.Score = new ReactiveValue<int> ();
+			this.Modifier = new CalculatedReactiveValue<int> ();
+			this.TempAdjust = new ReactiveValue<int> ();
+			this.TempModifier = new CalculatedReactiveValue<int> ();
 
-			this.Scores.Select (s => (s - 10) / 2).Subscribe (this.Modifiers);
-			this.Scores.Zip (this.TempAdjusts, (s, t) => (s + t - 10) / 2).Subscribe (this.TempModifiers);
+			this.Score.Select (s => (s - 10) / 2).Subscribe (this.Modifier);
+			this.Score.Zip (this.TempAdjust, (s, t) => (s + t - 10) / 2).Subscribe (this.TempModifier);
 		}
 	}
 }

@@ -16,9 +16,9 @@ namespace PFAssist.Core.Tests.iOS
 		{
 			var stat = new Stat (StatType.Strength);
 
-			stat.Scores.Value = 15;
+			stat.Score.Value = 15;
 
-			Assert.AreEqual (stat.Modifiers.Value, 2);
+			Assert.AreEqual (stat.Modifier.Value, 2);
 		}
 
 		[Test]
@@ -26,10 +26,10 @@ namespace PFAssist.Core.Tests.iOS
 		{
 			var stat = new Stat (StatType.Strength);
 
-			stat.Scores.Value = 15;
-			stat.TempAdjusts.Value = 5;
+			stat.Score.Value = 15;
+			stat.TempAdjust.Value = 5;
 
-			Assert.AreEqual (stat.TempModifiers.Value, 5);
+			Assert.AreEqual (stat.TempModifier.Value, 5);
 		}
 	}
 }
