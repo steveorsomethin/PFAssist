@@ -25,10 +25,10 @@ namespace PFAssist.Core
 
 		public Stat (StatType type)
 		{
-			this.Type = type;
+			Type = type;
 
-			this.Score.Select (s => (s - 10) / 2).Subscribe (this.Modifier);
-			this.Score.Zip (this.TempAdjust, (s, t) => (s + t - 10) / 2).Subscribe (this.TempModifier);
+			Score.Select (s => (s - 10) / 2).Subscribe (Modifier);
+			Score.Zip (TempAdjust, (s, t) => (s + t - 10) / 2).Subscribe (TempModifier);
 		}
 	}
 

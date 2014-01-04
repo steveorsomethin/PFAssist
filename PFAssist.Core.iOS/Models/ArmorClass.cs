@@ -19,30 +19,30 @@ namespace PFAssist.Core
 		public ArmorClass ()
 		{
 			Observable.CombineLatest (
-				this.Armor,
-				this.Shield,
-				this.Deflection,
-				this.Size,
-				this.NaturalArmor,
-				this.Miscellaneous,
+				Armor,
+				Shield,
+				Deflection,
+				Size,
+				NaturalArmor,
+				Miscellaneous,
 				(a, s, d, si, n, m) => 10 + a + s + d + si + n + m)
-				.Subscribe (this.FlatFootedTotal);
+				.Subscribe (FlatFootedTotal);
 
 			Observable.CombineLatest (
-				this.Deflection,
-				this.Miscellaneous,
-				this.Stats,
-				this.Size,
+				Deflection,
+				Miscellaneous,
+				Stats,
+				Size,
 				(d, m, st, si) => 10 + d + m + st + si)
-				.Subscribe (this.TouchTotal);
+				.Subscribe (TouchTotal);
 
 			Observable.CombineLatest (
-				this.Armor,
-				this.Shield,
-				this.NaturalArmor,
-				this.TouchTotal,
+				Armor,
+				Shield,
+				NaturalArmor,
+				TouchTotal,
 				(a, s, n, t) => a + s + n + t)
-				.Subscribe (this.Total);
+				.Subscribe (Total);
 		}
 	}
 }

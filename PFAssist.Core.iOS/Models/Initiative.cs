@@ -12,10 +12,10 @@ namespace PFAssist.Core
 		public Initiative ()
 		{
 			Observable.CombineLatest (
-				this.Miscellaneous,
-				this.Stats,
+				Miscellaneous,
+				Stats,
 				(m, s) => m + s)
-				.Subscribe (this.Total);
+				.Subscribe (Total);
 		}
 	}
 }
