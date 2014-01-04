@@ -7,6 +7,38 @@ namespace PFAssist.Core.Tests.iOS
 	public class ArmorClassTests
 	{
 		[Test]
+		public void FieldsSumFlatFootedTotalCorrectly ()
+		{
+			var ac = new ArmorClass ();
+
+			Assert.AreEqual (ac.FlatFootedTotal.Value, 10);
+
+			ac.Armor.Value = 5;
+
+			Assert.AreEqual (ac.FlatFootedTotal.Value, 15);
+
+			ac.Shield.Value = 5;
+
+			Assert.AreEqual (ac.FlatFootedTotal.Value, 20);
+
+			ac.Deflection.Value = 5;
+
+			Assert.AreEqual (ac.FlatFootedTotal.Value, 25);
+
+			ac.Size.OverrideWith (5);
+
+			Assert.AreEqual (ac.FlatFootedTotal.Value, 30);
+
+			ac.NaturalArmor.Value = 5;
+
+			Assert.AreEqual (ac.FlatFootedTotal.Value, 35);
+
+			ac.Miscellaneous.Value = 5;
+
+			Assert.AreEqual (ac.FlatFootedTotal.Value, 40);
+		}
+
+		[Test]
 		public void FieldsSumTouchTotalCorrectly ()
 		{
 			var ac = new ArmorClass ();

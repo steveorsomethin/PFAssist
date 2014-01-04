@@ -19,6 +19,8 @@ namespace PFAssist.Core
 
 		public CalculatedReactiveValue<int> Size { get; protected set; }
 
+		public CalculatedReactiveValue<int> FlatFootedTotal { get; protected set; }
+
 		public CalculatedReactiveValue<int> TouchTotal { get; protected set; }
 
 		public CalculatedReactiveValue<int> Total { get; protected set; }
@@ -32,8 +34,19 @@ namespace PFAssist.Core
 			this.Miscellaneous = new ReactiveValue<int> ();
 			this.Stats = new CalculatedReactiveValue<int> ();
 			this.Size = new CalculatedReactiveValue<int> ();
+			this.FlatFootedTotal = new CalculatedReactiveValue<int> ();
 			this.TouchTotal = new CalculatedReactiveValue<int> ();
 			this.Total = new CalculatedReactiveValue<int> ();
+
+			Observable.CombineLatest (
+				this.Armor,
+				this.Shield,
+				this.Deflection,
+				this.Size,
+				this.NaturalArmor,
+				this.Miscellaneous,
+				(a, s, d, si, n, m) => 10 + a + s + d + si + n + m)
+				.Subscribe (this.FlatFootedTotal);
 
 			Observable.CombineLatest (
 				this.Deflection,
