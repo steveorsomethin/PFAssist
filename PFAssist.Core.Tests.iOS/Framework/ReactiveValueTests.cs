@@ -78,6 +78,7 @@ namespace PFAssist.Core.Tests.iOS
 			calc.IsOverridden.Value = false;
 
 			Assert.AreEqual (calc.Value, 50);
+			Assert.False (calc.IsOverridden.Value);
 		}
 	}
 }

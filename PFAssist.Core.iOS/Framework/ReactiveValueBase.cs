@@ -6,6 +6,7 @@ namespace PFAssist.Core
 {
 	public abstract class ReactiveValueBase<T> : IReactiveValue<T>
 	{
+
 		#region IObservable implementation
 
 		public IDisposable Subscribe (IObserver<T> observer)

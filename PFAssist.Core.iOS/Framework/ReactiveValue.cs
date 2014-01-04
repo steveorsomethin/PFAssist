@@ -11,7 +11,7 @@ namespace PFAssist.Core
 			set { this._input.OnNext (value); }
 		}
 
-		public ReactiveValue() : base()
+		public ReactiveValue () : base ()
 		{
 			this._input.DistinctUntilChanged ().Subscribe (this._output);
 		}

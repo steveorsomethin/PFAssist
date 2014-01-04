@@ -10,13 +10,13 @@ namespace PFAssist.Core
 
 		private ISubject<T> _overrides;
 
-		public void OverrideWith(T value)
+		public void OverrideWith (T value)
 		{
 			this.IsOverridden.Value = true;
 			this._overrides.OnNext (value);
 		}
 
-		public CalculatedReactiveValue() : base()
+		public CalculatedReactiveValue () : base ()
 		{
 			this._overrides = new BehaviorSubject<T> (default(T));
 			this.IsOverridden = new ReactiveValue<bool> ();
@@ -24,7 +24,7 @@ namespace PFAssist.Core
 			this.IsOverridden
 				.Select ((b) => b ? this._overrides : this._input)
 				.Switch ()
-				.DistinctUntilChanged()
+				.DistinctUntilChanged ()
 				.Subscribe (this._output);
 		}
 	}
