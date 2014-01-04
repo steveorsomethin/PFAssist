@@ -19,6 +19,8 @@ namespace PFAssist.Core
 
 		public CalculatedReactiveValue<int> Size { get; protected set; }
 
+		public CalculatedReactiveValue<int> TouchTotal { get; protected set; }
+
 		public CalculatedReactiveValue<int> Total { get; protected set; }
 
 		public ArmorClass ()
@@ -30,17 +32,23 @@ namespace PFAssist.Core
 			this.Miscellaneous = new ReactiveValue<int> ();
 			this.Stats = new CalculatedReactiveValue<int> ();
 			this.Size = new CalculatedReactiveValue<int> ();
+			this.TouchTotal = new CalculatedReactiveValue<int> ();
 			this.Total = new CalculatedReactiveValue<int> ();
+
+			Observable.CombineLatest (
+				this.Deflection,
+				this.Miscellaneous,
+				this.Stats,
+				this.Size,
+				(d, m, st, si) => 10 + d + m + st + si)
+				.Subscribe (this.TouchTotal);
 
 			Observable.CombineLatest (
 				this.Armor,
 				this.Shield,
-				this.Deflection,
 				this.NaturalArmor,
-				this.Miscellaneous,
-				this.Stats,
-				this.Size,
-				(a, s, d, n, m, st, si) => 10 + a + s + d + n + m + st + si)
+				this.TouchTotal,
+				(a, s, n, t) => a + s + n + t)
 				.Subscribe (this.Total);
 		}
 	}
