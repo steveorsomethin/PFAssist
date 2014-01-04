@@ -6,15 +6,22 @@ namespace PFAssist.Core
 	public class ArmorClass
 	{
 		public ReactiveValue<int> Armor { get; protected set; }
+
 		public ReactiveValue<int> Shield { get; protected set; }
+
 		public ReactiveValue<int> Deflection { get; protected set; }
+
 		public ReactiveValue<int> NaturalArmor { get; protected set; }
+
 		public ReactiveValue<int> Miscellaneous { get; protected set; }
+
 		public CalculatedReactiveValue<int> Stats { get; protected set; }
+
 		public CalculatedReactiveValue<int> Size { get; protected set; }
+
 		public CalculatedReactiveValue<int> Total { get; protected set; }
 
-		public ArmorClass()
+		public ArmorClass ()
 		{
 			this.Armor = new ReactiveValue<int> ();
 			this.Shield = new ReactiveValue<int> ();

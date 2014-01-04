@@ -6,7 +6,9 @@ namespace PFAssist.Core
 	public class Initiative
 	{
 		public ReactiveValue<int> Miscellaneous { get; protected set; }
+
 		public CalculatedReactiveValue<int> Stats { get; protected set; }
+
 		public CalculatedReactiveValue<int> Total { get; protected set; }
 
 		public Initiative ()
