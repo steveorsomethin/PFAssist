@@ -8,24 +8,24 @@ namespace PFAssist.Core
 	{
 		public ReactiveValue<bool> IsOverridden { get; protected set; }
 
-		private ISubject<T> _overrides;
+		private ISubject<T> _overrideValues;
 
 		public void OverrideWith (T value)
 		{
 			this.IsOverridden.Value = true;
-			this._overrides.OnNext (value);
+			this._overrideValues.OnNext (value);
 		}
 
 		public CalculatedReactiveValue () : base ()
 		{
-			this._overrides = new BehaviorSubject<T> (default(T));
+			this._overrideValues = new BehaviorSubject<T> (default(T));
 			this.IsOverridden = new ReactiveValue<bool> ();
 
 			this.IsOverridden
-				.Select ((b) => b ? this._overrides : this._input)
+				.Select ((b) => b ? this._overrideValues : this._inputValues)
 				.Switch ()
 				.DistinctUntilChanged ()
-				.Subscribe (this._output);
+				.Subscribe (this._outputValues);
 		}
 	}
 }

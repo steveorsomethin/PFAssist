@@ -8,12 +8,12 @@ namespace PFAssist.Core
 	{
 		public new T Value {
 			get { return this.First (); }
-			set { this._input.OnNext (value); }
+			set { this._inputValues.OnNext (value); }
 		}
 
 		public ReactiveValue () : base ()
 		{
-			this._input.DistinctUntilChanged ().Subscribe (this._output);
+			this._inputValues.DistinctUntilChanged ().Subscribe (this._outputValues);
 		}
 	}
 }

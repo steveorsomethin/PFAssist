@@ -11,7 +11,7 @@ namespace PFAssist.Core
 
 		public IDisposable Subscribe (IObserver<T> observer)
 		{
-			return this._output.Subscribe (observer);
+			return this._outputValues.Subscribe (observer);
 		}
 
 		#endregion
@@ -20,33 +20,33 @@ namespace PFAssist.Core
 
 		public void OnCompleted ()
 		{
-			this._input.OnCompleted ();
+			this._inputValues.OnCompleted ();
 		}
 
 		public void OnError (Exception error)
 		{
-			this._input.OnError (error);
+			this._inputValues.OnError (error);
 		}
 
 		public void OnNext (T value)
 		{
-			this._input.OnNext (value);
+			this._inputValues.OnNext (value);
 		}
 
 		#endregion
 
-		protected ISubject<T> _input;
-		protected ISubject<T> _output;
+		protected ISubject<T> _inputValues;
+		protected ISubject<T> _outputValues;
 
 		public T Value {
 			get { return this.First (); }
-			protected set { this._input.OnNext (value); }
+			protected set { this._inputValues.OnNext (value); }
 		}
 
 		public ReactiveValueBase ()
 		{
-			this._input = new BehaviorSubject<T> (default(T));
-			this._output = new BehaviorSubject<T> (default(T));
+			this._inputValues = new BehaviorSubject<T> (default(T));
+			this._outputValues = new BehaviorSubject<T> (default(T));
 		}
 	}
 }
