@@ -13,7 +13,9 @@ namespace PFAssist.Core
 
 		public ReactiveValue () : base ()
 		{
-			this._inputValues.DistinctUntilChanged ().Subscribe (this._outputValues);
+			this._inputValues
+				.DistinctUntilChanged ()
+				.Subscribe (this._outputValues);
 		}
 	}
 }
