@@ -34,11 +34,6 @@ namespace PFAssist.Core
 			this.TempAdjusts = new ReactiveValue<int> ();
 			this.TempModifiers = new CalculatedReactiveValue<int> ();
 
-			this.Initialize ();
-		}
-
-		private void Initialize ()
-		{
 			this.Scores.Select (s => (s - 10) / 2).Subscribe (this.Modifiers);
 			this.Scores.Zip (this.TempAdjusts, (s, t) => (s + t - 10) / 2).Subscribe (this.TempModifiers);
 		}
