@@ -5,39 +5,19 @@ namespace PFAssist.Core
 {
 	public class ArmorClass
 	{
-		public ReactiveValue<int> Armor { get; protected set; }
-
-		public ReactiveValue<int> Shield { get; protected set; }
-
-		public ReactiveValue<int> Deflection { get; protected set; }
-
-		public ReactiveValue<int> NaturalArmor { get; protected set; }
-
-		public ReactiveValue<int> Miscellaneous { get; protected set; }
-
-		public CalculatedReactiveValue<int> Stats { get; protected set; }
-
-		public CalculatedReactiveValue<int> Size { get; protected set; }
-
-		public CalculatedReactiveValue<int> FlatFootedTotal { get; protected set; }
-
-		public CalculatedReactiveValue<int> TouchTotal { get; protected set; }
-
-		public CalculatedReactiveValue<int> Total { get; protected set; }
+		public readonly ReactiveValue<int> Armor = new ReactiveValue<int> ();
+		public readonly ReactiveValue<int> Shield = new ReactiveValue<int> ();
+		public readonly ReactiveValue<int> Deflection = new ReactiveValue<int> ();
+		public readonly ReactiveValue<int> NaturalArmor = new ReactiveValue<int> ();
+		public readonly ReactiveValue<int> Miscellaneous = new ReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Stats = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Size = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> FlatFootedTotal = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> TouchTotal = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Total = new CalculatedReactiveValue<int> ();
 
 		public ArmorClass ()
 		{
-			this.Armor = new ReactiveValue<int> ();
-			this.Shield = new ReactiveValue<int> ();
-			this.Deflection = new ReactiveValue<int> ();
-			this.NaturalArmor = new ReactiveValue<int> ();
-			this.Miscellaneous = new ReactiveValue<int> ();
-			this.Stats = new CalculatedReactiveValue<int> ();
-			this.Size = new CalculatedReactiveValue<int> ();
-			this.FlatFootedTotal = new CalculatedReactiveValue<int> ();
-			this.TouchTotal = new CalculatedReactiveValue<int> ();
-			this.Total = new CalculatedReactiveValue<int> ();
-
 			Observable.CombineLatest (
 				this.Armor,
 				this.Shield,

@@ -5,18 +5,12 @@ namespace PFAssist.Core
 {
 	public class Initiative
 	{
-		public ReactiveValue<int> Miscellaneous { get; protected set; }
-
-		public CalculatedReactiveValue<int> Stats { get; protected set; }
-
-		public CalculatedReactiveValue<int> Total { get; protected set; }
+		public readonly ReactiveValue<int> Miscellaneous = new ReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Stats = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Total = new CalculatedReactiveValue<int> ();
 
 		public Initiative ()
 		{
-			this.Miscellaneous = new ReactiveValue<int> ();
-			this.Stats = new CalculatedReactiveValue<int> ();
-			this.Total = new CalculatedReactiveValue<int> ();
-
 			Observable.CombineLatest (
 				this.Miscellaneous,
 				this.Stats,
