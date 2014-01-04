@@ -16,15 +16,15 @@ namespace PFAssist.Core
 
 	public class Stat
 	{
-		public StatType Type { get; set; }
+		public StatType Type { get; protected set; }
 
-		public ReactiveValue<int> Scores { get; set; }
+		public ReactiveValue<int> Scores { get; protected set; }
 
-		public CalculatedReactiveValue<int> Modifiers { get; set; }
+		public CalculatedReactiveValue<int> Modifiers { get; protected set; }
 
-		public ReactiveValue<int> TempAdjusts { get; set; }
+		public ReactiveValue<int> TempAdjusts { get; protected set; }
 
-		public CalculatedReactiveValue<int> TempModifiers { get; set; }
+		public CalculatedReactiveValue<int> TempModifiers { get; protected set; }
 
 		public Stat (StatType type)
 		{
