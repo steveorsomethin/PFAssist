@@ -49,7 +49,7 @@ namespace PFAssist.Core.Tests.iOS
 
 			Assert.AreEqual (ac.TouchTotal.Value, 15);
 
-			ac.Stats.OverrideWith (5);
+			ac.Dexterity.OverrideWith (5);
 
 			Assert.AreEqual (ac.TouchTotal.Value, 20);
 
@@ -85,7 +85,7 @@ namespace PFAssist.Core.Tests.iOS
 
 			Assert.AreEqual (ac.Total.Value, 35);
 
-			ac.Stats.OverrideWith (5);
+			ac.Dexterity.OverrideWith (5);
 
 			Assert.AreEqual (ac.Total.Value, 40);
 

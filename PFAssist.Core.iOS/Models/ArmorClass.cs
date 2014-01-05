@@ -10,7 +10,7 @@ namespace PFAssist.Core
 		public readonly ReactiveValue<int> Deflection = new ReactiveValue<int> ();
 		public readonly ReactiveValue<int> NaturalArmor = new ReactiveValue<int> ();
 		public readonly ReactiveValue<int> Miscellaneous = new ReactiveValue<int> ();
-		public readonly CalculatedReactiveValue<int> Stats = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Dexterity = new CalculatedReactiveValue<int> ();
 		public readonly CalculatedReactiveValue<int> Size = new CalculatedReactiveValue<int> ();
 		public readonly CalculatedReactiveValue<int> FlatFootedTotal = new CalculatedReactiveValue<int> ();
 		public readonly CalculatedReactiveValue<int> TouchTotal = new CalculatedReactiveValue<int> ();
@@ -31,7 +31,7 @@ namespace PFAssist.Core
 			Observable.CombineLatest (
 				Deflection,
 				Miscellaneous,
-				Stats,
+				Dexterity,
 				Size,
 				(d, m, st, si) => 10 + d + m + st + si)
 				.Subscribe (TouchTotal);
