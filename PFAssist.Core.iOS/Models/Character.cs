@@ -130,14 +130,10 @@ namespace PFAssist.Core
 			//Level info
 			Func<CharacterClasses, int, LevelInfo> levelInfoSelector = (c, l) => {
 				ClassTable classTable;
-				if (ClassTables.Tables.TryGetValue (c, out classTable)) {
-					LevelInfo levelInfo;
-					if (classTable.TryGetValue (l, out levelInfo)) {
-						return levelInfo;
-					}
-				}
+				LevelInfo levelInfo;
 
-				return LevelInfo.Default;
+				return ClassTables.Tables.TryGetValue (c, out classTable) && classTable.TryGetValue (l, out levelInfo) ?
+					levelInfo : LevelInfo.Default;
 			};
 
 			Observable.CombineLatest (Class1, Level1, levelInfoSelector).Subscribe (LevelInfo1);
@@ -178,7 +174,7 @@ namespace PFAssist.Core
 			AttackBonus.One.Subscribe (CombatBonus.BaseAttackBonus);
 			PrimaryStats.Strength.Modifier.Subscribe (CombatBonus.Strength);
 			PrimaryStats.Dexterity.Modifier.Subscribe (CombatBonus.Dexterity);
-			Size.Select(s => -((int)s)).Subscribe (CombatBonus.Size);
+			Size.Select (s => -((int)s)).Subscribe (CombatBonus.Size);
 		}
 	}
 }
