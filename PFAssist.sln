@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFAssist.Core.iOS", "PFAssi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFAssist.Core.Tests.iOS", "PFAssist.Core.Tests.iOS\PFAssist.Core.Tests.iOS.csproj", "{591FC4B3-4EF2-497C-B091-F8805F8521B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PFAssist.UI.iOS.Universal", "PFAssist.UI.iOS.Universal\PFAssist.UI.iOS.Universal.csproj", "{5F582ABB-9025-4637-96D5-DD4176D12F28}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,22 @@ Global
 		{591FC4B3-4EF2-497C-B091-F8805F8521B7}.Release|iPhone.Build.0 = Release|iPhone
 		{591FC4B3-4EF2-497C-B091-F8805F8521B7}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{591FC4B3-4EF2-497C-B091-F8805F8521B7}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.AppStore|iPhone.Build.0 = AppStore|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Debug|iPhone.Build.0 = Debug|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Release|Any CPU.ActiveCfg = Release|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Release|Any CPU.Build.0 = Release|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Release|iPhone.ActiveCfg = Release|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Release|iPhone.Build.0 = Release|iPhone
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{5F582ABB-9025-4637-96D5-DD4176D12F28}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 		{F910BCB8-E08C-4CB8-8DC9-5FA4629B43B7}.Ad-Hoc|iPhone.ActiveCfg = Debug|Any CPU
 		{F910BCB8-E08C-4CB8-8DC9-5FA4629B43B7}.Ad-Hoc|iPhone.Build.0 = Debug|Any CPU
 		{F910BCB8-E08C-4CB8-8DC9-5FA4629B43B7}.AppStore|iPhone.ActiveCfg = Debug|Any CPU
@@ -51,6 +69,6 @@ Global
 		{F910BCB8-E08C-4CB8-8DC9-5FA4629B43B7}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = PFAssist.Core.Tests.iOS\PFAssist.Core.Tests.iOS.csproj
+		StartupItem = PFAssist.UI.iOS.Universal\PFAssist.UI.iOS.Universal.csproj
 	EndGlobalSection
 EndGlobal
