@@ -15,7 +15,7 @@ namespace PFAssist.Core
 
 	public class ClassTables : Dictionary<CharacterClasses, ClassTable>
 	{
-		public static ClassTables Tables;
+		public static readonly ClassTables Tables;
 
 		static ClassTables ()
 		{
