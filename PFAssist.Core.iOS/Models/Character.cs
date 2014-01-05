@@ -105,15 +105,10 @@ namespace PFAssist.Core
 		{
 			Func<int, int, int, int> sumSelector = (v1, v2, v3) => v1 + v2 + v3;
 
-			// Armor class/Initiative
+			// Armor class
 			Size.Select (s => (int)s).Subscribe (ArmorClass.Size);
 
 			PrimaryStats.Dexterity.Modifier.Subscribe (ArmorClass.Dexterity);
-			PrimaryStats.Dexterity.Modifier.Subscribe (Initiative.Dexterity);
-
-			PrimaryStats.Constitution.Modifier.Subscribe (Saves.Fortitude.AbilityModifier);
-			PrimaryStats.Dexterity.Modifier.Subscribe (Saves.Reflex.AbilityModifier);
-			PrimaryStats.Wisdom.Modifier.Subscribe (Saves.Will.AbilityModifier);
 
 			Observable.CombineLatest (
 				PrimaryStats.Wisdom.Modifier,
@@ -127,7 +122,10 @@ namespace PFAssist.Core
 				})
 				.Subscribe (ArmorClass.Miscellaneous);
 
-			//Level info
+			// Initiative
+			PrimaryStats.Dexterity.Modifier.Subscribe (Initiative.Dexterity);
+
+			// Level info
 			Func<CharacterClasses, int, LevelInfo> levelInfoSelector = (c, l) => {
 				ClassTable classTable;
 				LevelInfo levelInfo;
@@ -141,6 +139,10 @@ namespace PFAssist.Core
 			Observable.CombineLatest (Class3, Level3, levelInfoSelector).Subscribe (LevelInfo3);
 
 			// Saves
+			PrimaryStats.Constitution.Modifier.Subscribe (Saves.Fortitude.AbilityModifier);
+			PrimaryStats.Dexterity.Modifier.Subscribe (Saves.Reflex.AbilityModifier);
+			PrimaryStats.Wisdom.Modifier.Subscribe (Saves.Will.AbilityModifier);
+
 			Observable.CombineLatest (
 				LevelInfo1.SelectMany (l => l.BaseFortitude),
 				LevelInfo2.SelectMany (l => l.BaseFortitude),
@@ -162,7 +164,7 @@ namespace PFAssist.Core
 				sumSelector)
 				.Subscribe (Saves.Will.BaseModifier);
 
-			//Attack Bonus
+			// Attack Bonus
 			Observable.CombineLatest (
 				LevelInfo1.SelectMany (l => l.BaseAttack),
 				LevelInfo2.SelectMany (l => l.BaseAttack),
@@ -170,7 +172,7 @@ namespace PFAssist.Core
 				sumSelector)
 				.Subscribe (AttackBonus.One);
 
-			//Combat Bonus
+			// Combat Bonus
 			AttackBonus.One.Subscribe (CombatBonus.BaseAttackBonus);
 			PrimaryStats.Strength.Modifier.Subscribe (CombatBonus.Strength);
 			PrimaryStats.Dexterity.Modifier.Subscribe (CombatBonus.Dexterity);
