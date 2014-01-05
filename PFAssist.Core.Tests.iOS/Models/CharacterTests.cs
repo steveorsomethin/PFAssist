@@ -139,5 +139,33 @@ namespace PFAssist.Core.Tests.iOS
 			Assert.AreEqual (character.AttackBonus.Three.Value, 1);
 			Assert.AreEqual (character.AttackBonus.Four.Value, 0);
 		}
+
+		[Test]
+		public void SourcesAffectCombatBonus ()
+		{
+			var character = new Character ();
+
+			character.Size.Value = Sizes.Small;
+			character.PrimaryStats.Strength.Score.Value = 15;
+			character.PrimaryStats.Dexterity.Score.Value = 14;
+
+			character.Class1.Value = CharacterClasses.Monk;
+			character.Level1.Value = 20;
+
+			Assert.AreEqual (character.CombatBonus.ManeuverBonus.Value, 16);
+			Assert.AreEqual (character.CombatBonus.DefenseBonus.Value, 28);
+
+			character.Class2.Value = CharacterClasses.Alchemist;
+			character.Level2.Value = 5;
+
+			Assert.AreEqual (character.CombatBonus.ManeuverBonus.Value, 19);
+			Assert.AreEqual (character.CombatBonus.DefenseBonus.Value, 31);
+
+			character.Class3.Value = CharacterClasses.Antipaladin;
+			character.Level3.Value = 5;
+
+			Assert.AreEqual (character.CombatBonus.ManeuverBonus.Value, 24);
+			Assert.AreEqual (character.CombatBonus.DefenseBonus.Value, 36);
+		}
 	}
 }

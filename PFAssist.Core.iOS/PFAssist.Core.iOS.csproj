@@ -73,5 +73,6 @@
     <Compile Include="Models\LevelInfo.cs" />
     <Compile Include="Models\ClassTable.cs" />
     <Compile Include="Models\AttackBonus.cs" />
+    <Compile Include="Models\CombatBonus.cs" />
   </ItemGroup>
 </Project>

@@ -128,6 +128,7 @@
     <Compile Include="Models\CharacterTests.cs" />
     <Compile Include="Models\SaveTests.cs" />
     <Compile Include="Models\AttackBonusTests.cs" />
+    <Compile Include="Models\CombatBonusTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
