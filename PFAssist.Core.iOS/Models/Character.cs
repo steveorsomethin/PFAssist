@@ -123,6 +123,7 @@ namespace PFAssist.Core
 				})
 				.Subscribe (ArmorClass.Miscellaneous);
 
+			//Level info
 			Func<CharacterClasses, int, LevelInfo> levelInfoSelector = (c, l) => {
 				ClassTable classTable;
 				if (ClassTables.Tables.TryGetValue (c, out classTable)) {
@@ -135,7 +136,6 @@ namespace PFAssist.Core
 				return LevelInfo.Default;
 			};
 
-			//Level info
 			Observable.CombineLatest (Class1, Level1, levelInfoSelector).Subscribe (LevelInfo1);
 			Observable.CombineLatest (Class2, Level2, levelInfoSelector).Subscribe (LevelInfo2);
 			Observable.CombineLatest (Class3, Level3, levelInfoSelector).Subscribe (LevelInfo3);
