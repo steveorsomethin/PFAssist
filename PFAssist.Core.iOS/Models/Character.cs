@@ -136,23 +136,9 @@ namespace PFAssist.Core
 			};
 
 			//Level info
-			Observable.CombineLatest (
-				Class1,
-				Level1,
-				levelInfoSelector)
-				.Subscribe (LevelInfo1);
-
-			Observable.CombineLatest (
-				Class2,
-				Level2,
-				levelInfoSelector)
-				.Subscribe (LevelInfo2);
-
-			Observable.CombineLatest (
-				Class3,
-				Level3,
-				levelInfoSelector)
-				.Subscribe (LevelInfo3);
+			Observable.CombineLatest (Class1, Level1, levelInfoSelector).Subscribe (LevelInfo1);
+			Observable.CombineLatest (Class2, Level2, levelInfoSelector).Subscribe (LevelInfo2);
+			Observable.CombineLatest (Class3, Level3, levelInfoSelector).Subscribe (LevelInfo3);
 
 			// Saves
 			Observable.CombineLatest (
