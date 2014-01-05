@@ -98,9 +98,12 @@ namespace PFAssist.Core
 		public readonly Saves Saves = new Saves ();
 		public readonly ArmorClass ArmorClass = new ArmorClass ();
 		public readonly Initiative Initiative = new Initiative ();
+		public readonly AttackBonus AttackBonus = new AttackBonus ();
 
 		public Character ()
 		{
+			Func<int, int, int, int> sumSelector = (v1, v2, v3) => v1 + v2 + v3;
+
 			// Armor class/Initiative
 			Size.Select (s => (int)s).Subscribe (ArmorClass.Size);
 
@@ -145,22 +148,30 @@ namespace PFAssist.Core
 				LevelInfo1.SelectMany (l => l.BaseFortitude),
 				LevelInfo2.SelectMany (l => l.BaseFortitude),
 				LevelInfo3.SelectMany (l => l.BaseFortitude),
-				(f1, f2, f3) => f1 + f2 + f3)
+				sumSelector)
 				.Subscribe (Saves.Fortitude.BaseModifier);
 
 			Observable.CombineLatest (
 				LevelInfo1.SelectMany (l => l.BaseReflex),
 				LevelInfo2.SelectMany (l => l.BaseReflex),
 				LevelInfo3.SelectMany (l => l.BaseReflex),
-				(r1, r2, r3) => r1 + r2 + r3)
+				sumSelector)
 				.Subscribe (Saves.Reflex.BaseModifier);
 
 			Observable.CombineLatest (
 				LevelInfo1.SelectMany (l => l.BaseWill),
 				LevelInfo2.SelectMany (l => l.BaseWill),
 				LevelInfo3.SelectMany (l => l.BaseWill),
-				(w1, w2, w3) => w1 + w2 + w3)
+				sumSelector)
 				.Subscribe (Saves.Will.BaseModifier);
+
+			//Attack Bonus
+			Observable.CombineLatest (
+				LevelInfo1.SelectMany (l => l.BaseAttack),
+				LevelInfo2.SelectMany (l => l.BaseAttack),
+				LevelInfo3.SelectMany (l => l.BaseAttack),
+				sumSelector)
+				.Subscribe (AttackBonus.One);
 		}
 	}
 }

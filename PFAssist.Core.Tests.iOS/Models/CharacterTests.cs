@@ -114,5 +114,30 @@ namespace PFAssist.Core.Tests.iOS
 
 			Assert.AreEqual (character.Saves.Will.BaseModifier.Value, 9);
 		}
+
+		[Test]
+		public void ClassesAffectAttackBonus ()
+		{
+			var character = new Character ();
+
+			character.Class1.Value = CharacterClasses.Monk;
+			character.Level1.Value = 5;
+
+			Assert.AreEqual (character.AttackBonus.One.Value, 3);
+
+			character.Class2.Value = CharacterClasses.Alchemist;
+			character.Level2.Value = 5;
+
+			Assert.AreEqual (character.AttackBonus.One.Value, 6);
+			Assert.AreEqual (character.AttackBonus.Two.Value, 1);
+
+			character.Class3.Value = CharacterClasses.Antipaladin;
+			character.Level3.Value = 5;
+
+			Assert.AreEqual (character.AttackBonus.One.Value, 11);
+			Assert.AreEqual (character.AttackBonus.Two.Value, 6);
+			Assert.AreEqual (character.AttackBonus.Three.Value, 1);
+			Assert.AreEqual (character.AttackBonus.Four.Value, 0);
+		}
 	}
 }
