@@ -69,5 +69,8 @@
     <Compile Include="Framework\IReactiveValue.cs" />
     <Compile Include="Framework\ReactiveValueBase.cs" />
     <Compile Include="Models\Initiative.cs" />
+    <Compile Include="Models\Save.cs" />
+    <Compile Include="Models\LevelInfo.cs" />
+    <Compile Include="Models\ClassTable.cs" />
   </ItemGroup>
 </Project>

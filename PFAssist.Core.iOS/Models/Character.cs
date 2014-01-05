@@ -86,21 +86,30 @@ namespace PFAssist.Core
 		public readonly ReactiveValue<Sizes> Size = new ReactiveValue<Sizes> ();
 		public readonly ReactiveValue<CharacterClasses> Class1 = new ReactiveValue<CharacterClasses> ();
 		public readonly ReactiveValue<int> Level1 = new ReactiveValue<int> ();
+		public readonly ReactiveValue<LevelInfo> LevelInfo1 = new ReactiveValue<LevelInfo> ();
 		public readonly ReactiveValue<CharacterClasses> Class2 = new ReactiveValue<CharacterClasses> ();
 		public readonly ReactiveValue<int> Level2 = new ReactiveValue<int> ();
+		public readonly ReactiveValue<LevelInfo> LevelInfo2 = new ReactiveValue<LevelInfo> ();
 		public readonly ReactiveValue<CharacterClasses> Class3 = new ReactiveValue<CharacterClasses> ();
 		public readonly ReactiveValue<int> Level3 = new ReactiveValue<int> ();
+		public readonly ReactiveValue<LevelInfo> LevelInfo3 = new ReactiveValue<LevelInfo> ();
 		// Composed bits
 		public readonly Stats PrimaryStats = new Stats ();
+		public readonly Saves Saves = new Saves ();
 		public readonly ArmorClass ArmorClass = new ArmorClass ();
 		public readonly Initiative Initiative = new Initiative ();
 
 		public Character ()
 		{
-			Size.Select (s => (int) s).Subscribe (ArmorClass.Size);
+			// Armor class/Initiative
+			Size.Select (s => (int)s).Subscribe (ArmorClass.Size);
 
 			PrimaryStats.Dexterity.Modifier.Subscribe (ArmorClass.Dexterity);
 			PrimaryStats.Dexterity.Modifier.Subscribe (Initiative.Dexterity);
+
+			PrimaryStats.Constitution.Modifier.Subscribe (Saves.Fortitude.AbilityModifier);
+			PrimaryStats.Dexterity.Modifier.Subscribe (Saves.Reflex.AbilityModifier);
+			PrimaryStats.Wisdom.Modifier.Subscribe (Saves.Will.AbilityModifier);
 
 			Observable.CombineLatest (
 				PrimaryStats.Wisdom.Modifier,
@@ -112,7 +121,60 @@ namespace PFAssist.Core
 
 					return c1 == monk || c2 == monk || c3 == monk ? w : 0;
 				})
-				.Subscribe(ArmorClass.Miscellaneous);
+				.Subscribe (ArmorClass.Miscellaneous);
+
+			Func<CharacterClasses, int, LevelInfo> levelInfoSelector = (c, l) => {
+				ClassTable classTable;
+				if (ClassTables.Tables.TryGetValue (c, out classTable)) {
+					LevelInfo levelInfo;
+					if (classTable.TryGetValue (l, out levelInfo)) {
+						return levelInfo;
+					}
+				}
+
+				return LevelInfo.Default;
+			};
+
+			//Level info
+			Observable.CombineLatest (
+				Class1,
+				Level1,
+				levelInfoSelector)
+				.Subscribe (LevelInfo1);
+
+			Observable.CombineLatest (
+				Class2,
+				Level2,
+				levelInfoSelector)
+				.Subscribe (LevelInfo2);
+
+			Observable.CombineLatest (
+				Class3,
+				Level3,
+				levelInfoSelector)
+				.Subscribe (LevelInfo3);
+
+			// Saves
+			Observable.CombineLatest (
+				LevelInfo1.SelectMany (l => l.BaseFortitude),
+				LevelInfo2.SelectMany (l => l.BaseFortitude),
+				LevelInfo3.SelectMany (l => l.BaseFortitude),
+				(f1, f2, f3) => f1 + f2 + f3)
+				.Subscribe (Saves.Fortitude.BaseModifier);
+
+			Observable.CombineLatest (
+				LevelInfo1.SelectMany (l => l.BaseReflex),
+				LevelInfo2.SelectMany (l => l.BaseReflex),
+				LevelInfo3.SelectMany (l => l.BaseReflex),
+				(r1, r2, r3) => r1 + r2 + r3)
+				.Subscribe (Saves.Reflex.BaseModifier);
+
+			Observable.CombineLatest (
+				LevelInfo1.SelectMany (l => l.BaseWill),
+				LevelInfo2.SelectMany (l => l.BaseWill),
+				LevelInfo3.SelectMany (l => l.BaseWill),
+				(w1, w2, w3) => w1 + w2 + w3)
+				.Subscribe (Saves.Will.BaseModifier);
 		}
 	}
 }

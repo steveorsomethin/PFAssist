@@ -77,7 +77,7 @@ namespace PFAssist.Core.Tests.iOS
 
 			Assert.AreEqual (ac.Total.Value, 25);
 
-			ac.Size.OverrideWith(5);
+			ac.Size.OverrideWith (5);
 
 			Assert.AreEqual (ac.Total.Value, 30);
 
