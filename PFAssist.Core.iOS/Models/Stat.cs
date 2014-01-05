@@ -1,6 +1,7 @@
 using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using System.Collections.Generic;
 
 namespace PFAssist.Core
 {
@@ -40,6 +41,17 @@ namespace PFAssist.Core
 		public readonly Stat Intelligence = new Stat (StatType.Intelligence);
 		public readonly Stat Wisdom = new Stat (StatType.Wisdom);
 		public readonly Stat Charisma = new Stat (StatType.Charisma);
+		public readonly Dictionary<StatType, Stat> Lookup = new Dictionary<StatType, Stat> ();
+
+		public Stats ()
+		{
+			Lookup [StatType.Strength] = Strength;
+			Lookup [StatType.Dexterity] = Dexterity;
+			Lookup [StatType.Constitution] = Constitution;
+			Lookup [StatType.Intelligence] = Intelligence;
+			Lookup [StatType.Wisdom] = Wisdom;
+			Lookup [StatType.Charisma] = Charisma;
+		}
 	}
 }
 
