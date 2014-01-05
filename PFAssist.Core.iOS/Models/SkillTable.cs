@@ -52,8 +52,10 @@ namespace PFAssist.Core
 	{
 		public readonly SkillType SkillType;
 		public readonly StatType StatType;
+		public readonly bool Untrained;
 		public readonly ReactiveValue<int> Ranks = new ReactiveValue<int> ();
 		public readonly ReactiveValue<int> MiscellaneousModifier = new ReactiveValue<int> ();
+		public readonly ReactiveValue<Stat> Stat = new ReactiveValue<Stat> ();
 		public readonly CalculatedReactiveValue<int> AbilityModifier = new CalculatedReactiveValue<int> ();
 		public readonly CalculatedReactiveValue<int> Trained = new CalculatedReactiveValue<int> ();
 		public readonly CalculatedReactiveValue<int> Total = new CalculatedReactiveValue<int> ();
@@ -62,10 +64,11 @@ namespace PFAssist.Core
 		public readonly CalculatedReactiveValue<CharacterClasses> Class2 = new CalculatedReactiveValue<CharacterClasses> ();
 		public readonly CalculatedReactiveValue<CharacterClasses> Class3 = new CalculatedReactiveValue<CharacterClasses> ();
 
-		public Skill (SkillType skillType, StatType statType, params CharacterClasses[] classes)
+		public Skill (SkillType skillType, StatType statType, bool untrained, params CharacterClasses[] classes)
 		{
 			SkillType = skillType;
 			StatType = statType;
+			Untrained = untrained;
 
 			foreach (var c in classes) {
 				this [c] = true;
@@ -76,18 +79,28 @@ namespace PFAssist.Core
 				Class2,
 				Class3,
 				Ranks,
-				(c1, c2, c3, r) => r > 0 && (this [c1] || this [c2] || this [c3]))
-				.Where (b => b)
+				(c1, c2, c3, r) => this [c1] || this [c2] || this [c3])
 				.Subscribe (IsActive);
 
-			IsActive.Select (a => a ? 3 : 0).Subscribe (Trained);
+			Ranks.Select (r => {
+				if ((r > 0 || untrained) && Stat.Value != null) {
+					var stat = Stat.Value;
+					return stat.TempModifier.Value > 0 ? stat.TempModifier.Value : stat.Modifier.Value;
+				}
+
+				return 0;
+			})
+			.Subscribe (AbilityModifier);
+
+			Observable.CombineLatest (IsActive, Ranks, (ia, r) => r > 0 && ia ? 3 : 0).Subscribe (Trained);
 
 			Observable.CombineLatest (
 				Ranks,
 				MiscellaneousModifier,
 				AbilityModifier,
 				Trained,
-				(r, m, a, t) => r + m + a + t)
+				IsActive,
+				(r, m, a, t, ia) => ia ? r + m + a + t : 0)
 				.Subscribe (Total);
 		}
 
@@ -113,6 +126,8 @@ namespace PFAssist.Core
 				var skill = pair.Value;
 				var stat = Stats.Lookup [skill.StatType];
 
+				skill.Stat.Value = stat;
+
 				Observable.CombineLatest (
 					stat.Modifier,
 					stat.TempModifier,
@@ -130,14 +145,14 @@ namespace PFAssist.Core
 			this.Stats = stats;
 
 			// Generated via a script
-			this [SkillType.Acrobatics] = new Skill (SkillType.Acrobatics, StatType.Dexterity,
+			this [SkillType.Acrobatics] = new Skill (SkillType.Acrobatics, StatType.Dexterity, true,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Bard,
 				CharacterClasses.Gunslinger,
 				CharacterClasses.Monk,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Appraise] = new Skill (SkillType.Appraise, StatType.Intelligence,
+			this [SkillType.Appraise] = new Skill (SkillType.Appraise, StatType.Intelligence, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Bard,
 				CharacterClasses.Cleric,
@@ -145,7 +160,7 @@ namespace PFAssist.Core
 				CharacterClasses.Sorcerer,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Bluff] = new Skill (SkillType.Bluff, StatType.Charisma,
+			this [SkillType.Bluff] = new Skill (SkillType.Bluff, StatType.Charisma, true,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
 				CharacterClasses.Cavalier,
@@ -154,7 +169,7 @@ namespace PFAssist.Core
 				CharacterClasses.Rogue,
 				CharacterClasses.Sorcerer);
 
-			this [SkillType.Climb] = new Skill (SkillType.Climb, StatType.Strength,
+			this [SkillType.Climb] = new Skill (SkillType.Climb, StatType.Strength, true,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Bard,
 				CharacterClasses.Cavalier,
@@ -167,7 +182,7 @@ namespace PFAssist.Core
 				CharacterClasses.Ranger,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Craft1] = new Skill (SkillType.Craft1, StatType.Intelligence,
+			this [SkillType.Craft1] = new Skill (SkillType.Craft1, StatType.Intelligence, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Barbarian,
@@ -189,7 +204,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Craft2] = new Skill (SkillType.Craft2, StatType.Intelligence,
+			this [SkillType.Craft2] = new Skill (SkillType.Craft2, StatType.Intelligence, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Barbarian,
@@ -211,7 +226,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Craft3] = new Skill (SkillType.Craft3, StatType.Intelligence,
+			this [SkillType.Craft3] = new Skill (SkillType.Craft3, StatType.Intelligence, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Barbarian,
@@ -233,7 +248,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Diplomacy] = new Skill (SkillType.Diplomacy, StatType.Charisma,
+			this [SkillType.Diplomacy] = new Skill (SkillType.Diplomacy, StatType.Charisma, true,
 				CharacterClasses.Bard,
 				CharacterClasses.Cavalier,
 				CharacterClasses.Cleric,
@@ -242,22 +257,22 @@ namespace PFAssist.Core
 				CharacterClasses.Paladin,
 				CharacterClasses.Rogue);
 
-			this [SkillType.DisableDevice] = new Skill (SkillType.DisableDevice, StatType.Dexterity,
+			this [SkillType.DisableDevice] = new Skill (SkillType.DisableDevice, StatType.Dexterity, false,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Disguise] = new Skill (SkillType.Disguise, StatType.Charisma,
+			this [SkillType.Disguise] = new Skill (SkillType.Disguise, StatType.Charisma, true,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
 				CharacterClasses.Inquisitor,
 				CharacterClasses.Rogue);
 
-			this [SkillType.EscapeArtist] = new Skill (SkillType.EscapeArtist, StatType.Dexterity,
+			this [SkillType.EscapeArtist] = new Skill (SkillType.EscapeArtist, StatType.Dexterity, true,
 				CharacterClasses.Bard,
 				CharacterClasses.Monk,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Fly] = new Skill (SkillType.Fly, StatType.Dexterity,
+			this [SkillType.Fly] = new Skill (SkillType.Fly, StatType.Dexterity, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Druid,
 				CharacterClasses.Magus,
@@ -266,7 +281,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.HandleAnimal] = new Skill (SkillType.HandleAnimal, StatType.Charisma,
+			this [SkillType.HandleAnimal] = new Skill (SkillType.HandleAnimal, StatType.Charisma, false,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Cavalier,
@@ -277,7 +292,7 @@ namespace PFAssist.Core
 				CharacterClasses.Ranger,
 				CharacterClasses.Summoner);
 
-			this [SkillType.Heal] = new Skill (SkillType.Heal, StatType.Wisdom,
+			this [SkillType.Heal] = new Skill (SkillType.Heal, StatType.Wisdom, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Cleric,
 				CharacterClasses.Druid,
@@ -288,7 +303,7 @@ namespace PFAssist.Core
 				CharacterClasses.Ranger,
 				CharacterClasses.Witch);
 
-			this [SkillType.Intimidate] = new Skill (SkillType.Intimidate, StatType.Charisma,
+			this [SkillType.Intimidate] = new Skill (SkillType.Intimidate, StatType.Charisma, true,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Bard,
@@ -303,7 +318,7 @@ namespace PFAssist.Core
 				CharacterClasses.Sorcerer,
 				CharacterClasses.Witch);
 
-			this [SkillType.Arcana] = new Skill (SkillType.Arcana, StatType.Intelligence,
+			this [SkillType.Arcana] = new Skill (SkillType.Arcana, StatType.Intelligence, false,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Bard,
 				CharacterClasses.Cleric,
@@ -313,7 +328,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Dungeoneering] = new Skill (SkillType.Dungeoneering, StatType.Intelligence,
+			this [SkillType.Dungeoneering] = new Skill (SkillType.Dungeoneering, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Fighter,
 				CharacterClasses.Inquisitor,
@@ -323,21 +338,21 @@ namespace PFAssist.Core
 				CharacterClasses.Summoner,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Engineering] = new Skill (SkillType.Engineering, StatType.Intelligence,
+			this [SkillType.Engineering] = new Skill (SkillType.Engineering, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Fighter,
 				CharacterClasses.Gunslinger,
 				CharacterClasses.Summoner,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Geography] = new Skill (SkillType.Geography, StatType.Intelligence,
+			this [SkillType.Geography] = new Skill (SkillType.Geography, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Druid,
 				CharacterClasses.Ranger,
 				CharacterClasses.Summoner,
 				CharacterClasses.Wizard);
 
-			this [SkillType.History] = new Skill (SkillType.History, StatType.Intelligence,
+			this [SkillType.History] = new Skill (SkillType.History, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Cleric,
 				CharacterClasses.Monk,
@@ -346,14 +361,14 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Local] = new Skill (SkillType.Local, StatType.Intelligence,
+			this [SkillType.Local] = new Skill (SkillType.Local, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Gunslinger,
 				CharacterClasses.Rogue,
 				CharacterClasses.Summoner,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Nature] = new Skill (SkillType.Nature, StatType.Intelligence,
+			this [SkillType.Nature] = new Skill (SkillType.Nature, StatType.Intelligence, false,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Bard,
 				CharacterClasses.Druid,
@@ -363,14 +378,14 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Nobility] = new Skill (SkillType.Nobility, StatType.Intelligence,
+			this [SkillType.Nobility] = new Skill (SkillType.Nobility, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Cleric,
 				CharacterClasses.Paladin,
 				CharacterClasses.Summoner,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Planes] = new Skill (SkillType.Planes, StatType.Intelligence,
+			this [SkillType.Planes] = new Skill (SkillType.Planes, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Cleric,
 				CharacterClasses.Inquisitor,
@@ -380,7 +395,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Religion] = new Skill (SkillType.Religion, StatType.Intelligence,
+			this [SkillType.Religion] = new Skill (SkillType.Religion, StatType.Intelligence, false,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
 				CharacterClasses.Cleric,
@@ -391,14 +406,14 @@ namespace PFAssist.Core
 				CharacterClasses.Summoner,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Linguistics] = new Skill (SkillType.Linguistics, StatType.Intelligence,
+			this [SkillType.Linguistics] = new Skill (SkillType.Linguistics, StatType.Intelligence, false,
 				CharacterClasses.Bard,
 				CharacterClasses.Cleric,
 				CharacterClasses.Rogue,
 				CharacterClasses.Summoner,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Perception] = new Skill (SkillType.Perception, StatType.Wisdom,
+			this [SkillType.Perception] = new Skill (SkillType.Perception, StatType.Wisdom, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Bard,
@@ -409,17 +424,17 @@ namespace PFAssist.Core
 				CharacterClasses.Ranger,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Perform1] = new Skill (SkillType.Perform1, StatType.Charisma,
+			this [SkillType.Perform1] = new Skill (SkillType.Perform1, StatType.Charisma, true,
 				CharacterClasses.Bard,
 				CharacterClasses.Monk,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Perform2] = new Skill (SkillType.Perform2, StatType.Charisma,
+			this [SkillType.Perform2] = new Skill (SkillType.Perform2, StatType.Charisma, true,
 				CharacterClasses.Bard,
 				CharacterClasses.Monk,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Profession1] = new Skill (SkillType.Profession1, StatType.Wisdom,
+			this [SkillType.Profession1] = new Skill (SkillType.Profession1, StatType.Wisdom, false,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
@@ -440,7 +455,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Profession2] = new Skill (SkillType.Profession2, StatType.Wisdom,
+			this [SkillType.Profession2] = new Skill (SkillType.Profession2, StatType.Wisdom, false,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
@@ -461,7 +476,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Ride] = new Skill (SkillType.Ride, StatType.Dexterity,
+			this [SkillType.Ride] = new Skill (SkillType.Ride, StatType.Dexterity, true,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Cavalier,
@@ -475,7 +490,7 @@ namespace PFAssist.Core
 				CharacterClasses.Ranger,
 				CharacterClasses.Summoner);
 
-			this [SkillType.SenseMotive] = new Skill (SkillType.SenseMotive, StatType.Wisdom,
+			this [SkillType.SenseMotive] = new Skill (SkillType.SenseMotive, StatType.Wisdom, true,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
 				CharacterClasses.Cavalier,
@@ -486,13 +501,13 @@ namespace PFAssist.Core
 				CharacterClasses.Paladin,
 				CharacterClasses.Rogue);
 
-			this [SkillType.SleightofHand] = new Skill (SkillType.SleightofHand, StatType.Dexterity,
+			this [SkillType.SleightofHand] = new Skill (SkillType.SleightofHand, StatType.Dexterity, false,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Bard,
 				CharacterClasses.Gunslinger,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Spellcraft] = new Skill (SkillType.Spellcraft, StatType.Intelligence,
+			this [SkillType.Spellcraft] = new Skill (SkillType.Spellcraft, StatType.Intelligence, false,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
@@ -508,7 +523,7 @@ namespace PFAssist.Core
 				CharacterClasses.Witch,
 				CharacterClasses.Wizard);
 
-			this [SkillType.Stealth] = new Skill (SkillType.Stealth, StatType.Dexterity,
+			this [SkillType.Stealth] = new Skill (SkillType.Stealth, StatType.Dexterity, true,
 				CharacterClasses.Antipaladin,
 				CharacterClasses.Bard,
 				CharacterClasses.Inquisitor,
@@ -516,7 +531,7 @@ namespace PFAssist.Core
 				CharacterClasses.Ranger,
 				CharacterClasses.Rogue);
 
-			this [SkillType.Survival] = new Skill (SkillType.Survival, StatType.Wisdom,
+			this [SkillType.Survival] = new Skill (SkillType.Survival, StatType.Wisdom, true,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Druid,
@@ -525,7 +540,7 @@ namespace PFAssist.Core
 				CharacterClasses.Inquisitor,
 				CharacterClasses.Ranger);
 
-			this [SkillType.Swim] = new Skill (SkillType.Swim, StatType.Strength,
+			this [SkillType.Swim] = new Skill (SkillType.Swim, StatType.Strength, true,
 				CharacterClasses.Barbarian,
 				CharacterClasses.Cavalier,
 				CharacterClasses.Druid,
@@ -537,7 +552,7 @@ namespace PFAssist.Core
 				CharacterClasses.Ranger,
 				CharacterClasses.Rogue);
 
-			this [SkillType.UseMagicDevice] = new Skill (SkillType.UseMagicDevice, StatType.Charisma,
+			this [SkillType.UseMagicDevice] = new Skill (SkillType.UseMagicDevice, StatType.Charisma, false,
 				CharacterClasses.Alchemist,
 				CharacterClasses.Bard,
 				CharacterClasses.Magus,
