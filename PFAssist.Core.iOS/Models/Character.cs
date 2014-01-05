@@ -100,9 +100,12 @@ namespace PFAssist.Core
 		public readonly Initiative Initiative = new Initiative ();
 		public readonly AttackBonus AttackBonus = new AttackBonus ();
 		public readonly CombatBonus CombatBonus = new CombatBonus ();
+		public readonly SkillTable SkillTable;
 
 		public Character ()
 		{
+			SkillTable = new SkillTable(PrimaryStats);
+
 			Func<int, int, int, int> sumSelector = (v1, v2, v3) => v1 + v2 + v3;
 
 			// Armor class
@@ -177,6 +180,11 @@ namespace PFAssist.Core
 			PrimaryStats.Strength.Modifier.Subscribe (CombatBonus.Strength);
 			PrimaryStats.Dexterity.Modifier.Subscribe (CombatBonus.Dexterity);
 			Size.Select (s => -((int)s)).Subscribe (CombatBonus.Size);
+
+			// Skill Table
+			Class1.Subscribe (SkillTable.Class1);
+			Class2.Subscribe (SkillTable.Class2);
+			Class3.Subscribe (SkillTable.Class3);
 		}
 	}
 }

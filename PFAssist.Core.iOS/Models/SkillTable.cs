@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
 
 namespace PFAssist.Core
 {
@@ -51,6 +52,15 @@ namespace PFAssist.Core
 	{
 		public readonly SkillType SkillType;
 		public readonly StatType StatType;
+		public readonly ReactiveValue<int> Ranks = new ReactiveValue<int> ();
+		public readonly ReactiveValue<int> MiscellaneousModifier = new ReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> AbilityModifier = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Trained = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<int> Total = new CalculatedReactiveValue<int> ();
+		public readonly CalculatedReactiveValue<bool> IsActive = new CalculatedReactiveValue<bool> ();
+		public readonly CalculatedReactiveValue<CharacterClasses> Class1 = new CalculatedReactiveValue<CharacterClasses> ();
+		public readonly CalculatedReactiveValue<CharacterClasses> Class2 = new CalculatedReactiveValue<CharacterClasses> ();
+		public readonly CalculatedReactiveValue<CharacterClasses> Class3 = new CalculatedReactiveValue<CharacterClasses> ();
 
 		public Skill (SkillType skillType, StatType statType, params CharacterClasses[] classes)
 		{
@@ -60,6 +70,25 @@ namespace PFAssist.Core
 			foreach (var c in classes) {
 				this [c] = true;
 			}
+
+			Observable.CombineLatest (
+				Class1,
+				Class2,
+				Class3,
+				Ranks,
+				(c1, c2, c3, r) => r > 0 && (this [c1] || this [c2] || this [c3]))
+				.Where (b => b)
+				.Subscribe (IsActive);
+
+			IsActive.Select (a => a ? 3 : 0).Subscribe (Trained);
+
+			Observable.CombineLatest (
+				Ranks,
+				MiscellaneousModifier,
+				AbilityModifier,
+				Trained,
+				(r, m, a, t) => r + m + a + t)
+				.Subscribe (Total);
 		}
 
 		public new bool this [CharacterClasses key] {
@@ -73,15 +102,33 @@ namespace PFAssist.Core
 
 	public class SkillTable : Dictionary<SkillType, Skill>
 	{
-		public static SkillTable Table;
+		public readonly CalculatedReactiveValue<CharacterClasses> Class1 = new CalculatedReactiveValue<CharacterClasses> ();
+		public readonly CalculatedReactiveValue<CharacterClasses> Class2 = new CalculatedReactiveValue<CharacterClasses> ();
+		public readonly CalculatedReactiveValue<CharacterClasses> Class3 = new CalculatedReactiveValue<CharacterClasses> ();
+		private readonly Stats Stats;
 
-		static SkillTable ()
+		private void Initialize ()
 		{
-			Table = new SkillTable ();
+			foreach (var pair in this) {
+				var skill = pair.Value;
+				var stat = Stats.Lookup [skill.StatType];
+
+				Observable.CombineLatest (
+					stat.Modifier,
+					stat.TempModifier,
+					(m, t) => t > 0 ? t : m)
+					.Subscribe (skill.AbilityModifier);
+
+				Class1.Subscribe (skill.Class1);
+				Class2.Subscribe (skill.Class2);
+				Class3.Subscribe (skill.Class3);
+			}
 		}
 
-		public SkillTable ()
+		public SkillTable (Stats stats)
 		{
+			this.Stats = stats;
+
 			// Generated via a script
 			this [SkillType.Acrobatics] = new Skill (SkillType.Acrobatics, StatType.Dexterity,
 				CharacterClasses.Barbarian,
@@ -498,6 +545,8 @@ namespace PFAssist.Core
 				CharacterClasses.Sorcerer,
 				CharacterClasses.Summoner,
 				CharacterClasses.Witch);
+
+			this.Initialize ();
 		}
 	}
 }
