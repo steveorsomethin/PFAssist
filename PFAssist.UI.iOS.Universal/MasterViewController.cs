@@ -3,20 +3,24 @@ using System.Drawing;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using PFAssist.Core;
+using System.Reactive.Linq;
 
 namespace PFAssist.UI.iOS.Universal
 {
-	public class TestData
+	public class Row
 	{
-		public int ID { get; set; } 
-		public String Derp { get; set; }
+
+	}
+
+	public class Section
+	{
 	}
 
 	public partial class MasterViewController : UITableViewController
 	{
 		DataSource dataSource;
-
-		int ID = 0;
+		public Character character = new Character ();
 
 		public MasterViewController ()
 			: base (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? "MasterViewController_iPhone" : "MasterViewController_iPad", null)
@@ -38,10 +42,7 @@ namespace PFAssist.UI.iOS.Universal
 
 		void AddNewItem (object sender, EventArgs args)
 		{
-			dataSource.Objects.Insert (0, new TestData {ID = ID++, Derp = "Herp"});
 
-			using (var indexPath = NSIndexPath.FromRowSection (0, 0))
-				TableView.InsertRows (new NSIndexPath[] { indexPath }, UITableViewRowAnimation.Automatic);
 		}
 
 		public override void DidReceiveMemoryWarning ()
@@ -63,12 +64,24 @@ namespace PFAssist.UI.iOS.Universal
 			NavigationItem.RightBarButtonItem = addButton;
 
 			TableView.Source = dataSource = new DataSource (this);
+
+			dataSource.Objects.AddRange(character.PrimaryStats.Lookup.Values);
+
+			// Should be disposing the NSIndexPaths, but oh well
+			TableView.InsertRows (new NSIndexPath[] { 
+				NSIndexPath.FromRowSection (0, 0),
+				NSIndexPath.FromRowSection (1, 0),
+				NSIndexPath.FromRowSection (2, 0),
+				NSIndexPath.FromRowSection (3, 0),
+				NSIndexPath.FromRowSection (4, 0),
+				NSIndexPath.FromRowSection (5, 0),
+			}, UITableViewRowAnimation.Automatic);
 		}
 
 		class DataSource : UITableViewSource
 		{
 			static readonly NSString CellIdentifier = new NSString ("Cell");
-			readonly List<TestData> objects = new List<TestData> ();
+			readonly List<Stat> objects = new List<Stat> ();
 			readonly MasterViewController controller;
 
 			public DataSource (MasterViewController controller)
@@ -76,7 +89,7 @@ namespace PFAssist.UI.iOS.Universal
 				this.controller = controller;
 			}
 
-			public IList<TestData> Objects {
+			public List<Stat> Objects {
 				get { return objects; }
 			}
 			// Customize the number of sections in the table view.
@@ -94,16 +107,29 @@ namespace PFAssist.UI.iOS.Universal
 			{
 				var cell = tableView.DequeueReusableCell (CellIdentifier);
 				if (cell == null) {
-					cell = StatCell.Create ();// (UITableViewCellStyle.Default, CellIdentifier);
+					var statCell = StatCell.Create ();
+
+					statCell.Stat.Value = objects [indexPath.Row];
+
+					cell = statCell;
+
 					if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone)
 						cell.Accessory = UITableViewCellAccessory.DisclosureIndicator;
 				}
 
-				var d = objects [indexPath.Row];
-
-				cell.TextLabel.Text = d.ID.ToString () + " " + d.Derp;
+//				cell.TextLabel.Text = d.ID.ToString () + " " + d.Derp;
 				
 				return cell;
+			}
+
+			public override float GetHeightForRow (UITableView tableView, NSIndexPath indexPath)
+			{
+				return 100;
+			}
+
+			public override string TitleForHeader (UITableView tableView, int section)
+			{
+				return "Primary Stats";
 			}
 
 			public override bool CanEditRow (UITableView tableView, NSIndexPath indexPath)
@@ -138,17 +164,17 @@ namespace PFAssist.UI.iOS.Universal
 			*/
 			public override void RowSelected (UITableView tableView, NSIndexPath indexPath)
 			{
-				if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
-					if (controller.DetailViewController == null)
-						controller.DetailViewController = new DetailViewController ();
-
-					controller.DetailViewController.SetDetailItem (objects [indexPath.Row]);
-
-					// Pass the selected object to the new view controller.
-					controller.NavigationController.PushViewController (controller.DetailViewController, true);
-				} else {
-					controller.DetailViewController.SetDetailItem (objects [indexPath.Row]);
-				}
+//				if (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone) {
+//					if (controller.DetailViewController == null)
+//						controller.DetailViewController = new DetailViewController ();
+//
+//					controller.DetailViewController.SetDetailItem (objects [indexPath.Row]);
+//
+//					// Pass the selected object to the new view controller.
+//					controller.NavigationController.PushViewController (controller.DetailViewController, true);
+//				} else {
+//					controller.DetailViewController.SetDetailItem (objects [indexPath.Row]);
+//				}
 			}
 		}
 	}

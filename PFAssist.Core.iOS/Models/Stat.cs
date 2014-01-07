@@ -28,8 +28,8 @@ namespace PFAssist.Core
 		{
 			Type = type;
 
-			Score.Select (s => (s - 10) / 2).Subscribe (Modifier);
-			Score.Zip (TempAdjust, (s, t) => (s + t - 10) / 2).Subscribe (TempModifier);
+			Score.Select (s => Math.Max(0, (s - 10) / 2)).Subscribe (Modifier);
+			Score.CombineLatest (TempAdjust, (s, t) => Math.Max(0, (s + t - 10) / 2)).Subscribe (TempModifier);
 		}
 	}
 

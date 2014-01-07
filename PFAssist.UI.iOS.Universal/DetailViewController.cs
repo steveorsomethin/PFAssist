@@ -3,13 +3,14 @@ using System.Drawing;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using PFAssist.Core;
 
 namespace PFAssist.UI.iOS.Universal
 {
 	public partial class DetailViewController : UIViewController
 	{
 		UIPopoverController masterPopoverController;
-		object detailItem;
+		Stat detailItem;
 
 		public DetailViewController ()
 			: base (UIDevice.CurrentDevice.UserInterfaceIdiom == UIUserInterfaceIdiom.Phone ? "DetailViewController_iPhone" : "DetailViewController_iPad", null)
@@ -19,7 +20,7 @@ namespace PFAssist.UI.iOS.Universal
 			// Custom initialization
 		}
 
-		public void SetDetailItem (object newDetailItem)
+		public void SetDetailItem (Stat newDetailItem)
 		{
 			if (detailItem != newDetailItem) {
 				detailItem = newDetailItem;
@@ -35,8 +36,8 @@ namespace PFAssist.UI.iOS.Universal
 		void ConfigureView ()
 		{
 			// Update the user interface for the detail item
-			if (IsViewLoaded && detailItem != null)
-				detailDescriptionLabel.Text = detailItem.ToString ();
+//			if (IsViewLoaded && detailItem != null)
+//				detailDescriptionLabel.Text = detailItem.Derp + " " + detailItem.ID.ToString ();
 		}
 
 		public override void DidReceiveMemoryWarning ()
