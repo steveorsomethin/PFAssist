@@ -26,8 +26,6 @@ namespace PFAssist.UI.iOS
 	{
 		SimpleStatViewModel vm;
 
-		#region IViewFor implementation
-
 		SimpleStatViewModel IViewFor<SimpleStatViewModel>.ViewModel {
 			get {
 				return vm;
@@ -37,10 +35,6 @@ namespace PFAssist.UI.iOS
 			}
 		}
 
-		#endregion
-
-		#region IViewFor implementation
-
 		public object ViewModel {
 			get {
 				return vm;
@@ -49,8 +43,6 @@ namespace PFAssist.UI.iOS
 				vm = (SimpleStatViewModel)value;
 			}
 		}
-
-		#endregion
 
 		public UILabel DescriptionTextLabel {
 			get {
@@ -104,12 +96,12 @@ namespace PFAssist.UI.iOS
 			this.tblMain.Source = tableDataSource = new ReactiveTableViewSource (this.tblMain);
 
 			tableDataSource.Data = new ReactiveList<TableSectionInformation<UITableViewCell>>(new [] {
-				MakeSection("AC", new ReactiveList<SimpleStatViewModel> (new [] {
+				MakeSection("ARMOR", new ReactiveList<SimpleStatViewModel> (new [] {
 					new SimpleStatViewModel("AC", character.ArmorClass.Total),
 					new SimpleStatViewModel("Touch", character.ArmorClass.TouchTotal),
 					new SimpleStatViewModel("Flat Footed", character.ArmorClass.FlatFootedTotal)
 				})),
-				MakeSection("Saves", new ReactiveList<SimpleStatViewModel> (new [] {
+				MakeSection("SAVES", new ReactiveList<SimpleStatViewModel> (new [] {
 					new SimpleStatViewModel("Fortitude", character.Saves.Fortitude.Total),
 					new SimpleStatViewModel("Reflex", character.Saves.Reflex.Total),
 					new SimpleStatViewModel("will", character.Saves.Will.Total)
@@ -133,7 +125,7 @@ namespace PFAssist.UI.iOS
 			headerInfo.Header = new TableSectionHeader (() => {
 				var header = new UITableViewHeaderFooterView ();
 				header.TextLabel.Text = headerText;
-				header.ContentView.BackgroundColor = new UIColor(0.8f, 0.8f, 0.8f, 1.0f);
+				header.ContentView.BackgroundColor = new UIColor(0.9f, 0.9f, 0.9f, 1.0f);
 				return header;
 			}, 50.0f);
 
