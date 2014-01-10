@@ -117,19 +117,19 @@ namespace PFAssist.UI.iOS
 
 		private TableSectionInformation<UITableViewCell> MakeSection(String headerText, ReactiveList<SimpleStatViewModel> statCellList)
 		{
-			var headerInfo = new TableSectionInformation<UITableViewCell> (statCellList, new NSString("SimpleStatCell"), 40.0f, (cell) => {
+			var sectionInfo = new TableSectionInformation<UITableViewCell> (statCellList, new NSString("SimpleStatCell"), 40.0f, (cell) => {
 				var sCell = (SimpleStatCell)cell;
 				sCell.BindToViewModel();
 			});
 
-			headerInfo.Header = new TableSectionHeader (() => {
+			sectionInfo.Header = new TableSectionHeader (() => {
 				var header = new UITableViewHeaderFooterView ();
 				header.TextLabel.Text = headerText;
 				header.ContentView.BackgroundColor = new UIColor(0.9f, 0.9f, 0.9f, 1.0f);
 				return header;
 			}, 50.0f);
 
-			return headerInfo;
+			return sectionInfo;
 		}
 	}
 }
