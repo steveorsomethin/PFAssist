@@ -151,6 +151,10 @@
     <Compile Include="ViewModels\SimpleStatViewModel.designer.cs">
       <DependentUpon>SimpleStatViewModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="CharacterDetailsViewController.cs" />
+    <Compile Include="CharacterDetailsViewController.designer.cs">
+      <DependentUpon>CharacterDetailsViewController.cs</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
@@ -165,5 +169,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModels\" />
+    <Folder Include="ViewControllers\" />
   </ItemGroup>
 </Project>
