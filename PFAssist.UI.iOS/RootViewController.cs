@@ -51,6 +51,15 @@ namespace PFAssist.UI.iOS
 			View.GestureRecognizers = PageViewController.GestureRecognizers;
 		}
 
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
+
+			NavigationController.NavigationBar.SetBackgroundImage (new UIImage (), UIBarMetrics.Default);
+			NavigationController.NavigationBar.ShadowImage = new UIImage ();
+			NavigationController.NavigationBar.Translucent = true;
+		}
+
 		[Export ("pageViewController:spineLocationForInterfaceOrientation:")]
 		public UIPageViewControllerSpineLocation GetSpineLocation (UIPageViewController pageViewController, UIInterfaceOrientation orientation)
 		{
