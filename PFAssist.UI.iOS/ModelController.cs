@@ -2,17 +2,29 @@ using System;
 using System.Collections.Generic;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using PFAssist.Core;
 
 namespace PFAssist.UI.iOS
 {
 	public class ModelController : UIPageViewControllerDataSource
 	{
-		readonly List<string> pageData;
+		readonly List<Character> pageData;
 
 		public ModelController ()
 		{
-			var formatter = new NSDateFormatter ();
-			pageData = new List<string> (formatter.MonthSymbols);
+			var char1 = new Character ();
+			var char2 = new Character ();
+			var char3 = new Character ();
+
+			char1.Name.Value = "Frodo";
+			char2.Name.Value = "Aragorn";
+			char3.Name.Value = "Gandalf";
+
+			pageData = new List<Character>() {
+				char1,
+				char2,
+				char3
+			};
 		}
 
 		public DataViewController GetViewController (int index, UIStoryboard storyboard)

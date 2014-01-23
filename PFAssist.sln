@@ -69,6 +69,6 @@ Global
 		{F910BCB8-E08C-4CB8-8DC9-5FA4629B43B7}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = PFAssist.Core.iOS\PFAssist.Core.iOS.csproj
+		StartupItem = PFAssist.UI.iOS\PFAssist.UI.iOS.csproj
 	EndGlobalSection
 EndGlobal

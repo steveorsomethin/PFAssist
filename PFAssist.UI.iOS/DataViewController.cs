@@ -1,5 +1,6 @@
 using System;
 using MonoTouch.UIKit;
+using PFAssist.Core;
 
 namespace PFAssist.UI.iOS
 {
@@ -9,7 +10,7 @@ namespace PFAssist.UI.iOS
 		{
 		}
 
-		public string DataObject {
+		public Character DataObject {
 			get;
 			set;
 		}
@@ -33,7 +34,7 @@ namespace PFAssist.UI.iOS
 		{
 			base.ViewWillAppear (animated);
 
-			dataLabel.Text = DataObject;
+			dataLabel.Text = DataObject.Name.Value;
 		}
 	}
 }

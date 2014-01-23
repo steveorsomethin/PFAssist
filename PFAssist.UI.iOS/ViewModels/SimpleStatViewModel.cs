@@ -20,7 +20,7 @@ namespace PFAssist.UI.iOS
 	}
 
 	[Register("SimpleStatCell")]
-	public class SimpleStatCell : ReactiveTableViewCell, IViewFor<SimpleStatViewModel>
+	public partial class SimpleStatCell : ReactiveTableViewCell, IViewFor<SimpleStatViewModel>
 	{
 		SimpleStatViewModel vm;
 

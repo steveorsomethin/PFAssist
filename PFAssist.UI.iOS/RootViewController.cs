@@ -27,7 +27,7 @@ namespace PFAssist.UI.iOS
 			base.ViewDidLoad ();
 
 			// Configure the page view controller and add it as a child view controller.
-			PageViewController = new UIPageViewController (UIPageViewControllerTransitionStyle.PageCurl, UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation.Min);
+			PageViewController = new UIPageViewController (UIPageViewControllerTransitionStyle.Scroll, UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation.Min);
 			PageViewController.WeakDelegate = this;
 
 			var startingViewController = ModelController.GetViewController (0, Storyboard);
