@@ -155,6 +155,11 @@
     <Compile Include="CharacterDetailsViewController.designer.cs">
       <DependentUpon>CharacterDetailsViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="SimpleStatViewCell.cs" />
+    <Compile Include="SimpleStatViewCell.designer.cs">
+      <DependentUpon>SimpleStatViewCell.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EditableViewCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
