@@ -18,51 +18,5 @@ namespace PFAssist.UI.iOS
 			dataSource.Subscribe (Data);
 		}
 	}
-
-	[Register("SimpleStatCell")]
-	public partial class SimpleStatCell : ReactiveTableViewCell, IViewFor<SimpleStatViewModel>
-	{
-		SimpleStatViewModel vm;
-
-		SimpleStatViewModel IViewFor<SimpleStatViewModel>.ViewModel {
-			get {
-				return vm;
-			}
-			set {
-				vm = value;
-			}
-		}
-
-		public object ViewModel {
-			get {
-				return vm;
-			}
-			set {
-				vm = (SimpleStatViewModel)value;
-			}
-		}
-
-		public UILabel DescriptionTextLabel {
-			get {
-				return (UILabel)this.ViewWithTag (1);
-			}
-		}
-
-		public UILabel DataTextLabel {
-			get {
-				return (UILabel)this.ViewWithTag (2);
-			}
-		}
-
-		public void BindToViewModel()
-		{
-			DescriptionTextLabel.Text = vm.Description;
-			vm.Data.BindTo (DataTextLabel, (d) => d.Text);
-		}
-
-		public SimpleStatCell(IntPtr handle) : base(handle)
-		{
-		}
-	}
 }
 
