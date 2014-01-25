@@ -21,12 +21,11 @@ namespace PFAssist.UI.iOS
 		}
 	}
 
-	[Register("SimpleStatCell")]
-	public class SimpleStatCell : ReactiveTableViewCell, IViewFor<SimpleStatViewModel>
+	public abstract class TableCellBase<T> : ReactiveTableViewCell, IViewFor<T> where T:class
 	{
-		SimpleStatViewModel vm;
+		protected T vm;
 
-		SimpleStatViewModel IViewFor<SimpleStatViewModel>.ViewModel {
+		T IViewFor<T>.ViewModel {
 			get {
 				return vm;
 			}
@@ -40,10 +39,20 @@ namespace PFAssist.UI.iOS
 				return vm;
 			}
 			set {
-				vm = (SimpleStatViewModel)value;
+				vm = (T)value;
 			}
 		}
 
+		public abstract void BindToViewModel ();
+
+		public TableCellBase(IntPtr handle) : base(handle)
+		{
+		}
+	}
+
+	[Register("SimpleStatCell")]
+	public class SimpleStatCell : TableCellBase<SimpleStatViewModel>
+	{
 		public UILabel DescriptionTextLabel {
 			get {
 				return (UILabel)this.ViewWithTag (1);
@@ -56,7 +65,7 @@ namespace PFAssist.UI.iOS
 			}
 		}
 
-		public void BindToViewModel()
+		public override void BindToViewModel()
 		{
 			DescriptionTextLabel.Text = vm.Description;
 			vm.Data.BindTo (DataTextLabel, (d) => d.Text);
@@ -105,7 +114,7 @@ namespace PFAssist.UI.iOS
 					new SimpleStatViewModel("Fortitude", character.Saves.Fortitude.Total),
 					new SimpleStatViewModel("Reflex", character.Saves.Reflex.Total),
 					new SimpleStatViewModel("will", character.Saves.Will.Total)
-				}))
+				}), true)
 			});
 
 			character.Initiative.Total.BindTo (txtInitiative, (t) => t.Text);
@@ -115,19 +124,21 @@ namespace PFAssist.UI.iOS
 				.Subscribe (t => InvokeOnMainThread(() => character.PrimaryStats.Dexterity.Score.Value = t + 15));
 		}
 
-		private TableSectionInformation<UITableViewCell> MakeSection(String headerText, ReactiveList<SimpleStatViewModel> statCellList)
+		private TableSectionInformation<UITableViewCell> MakeSection(String headerText, ReactiveList<SimpleStatViewModel> statCellList, bool useHeader = false)
 		{
 			var sectionInfo = new TableSectionInformation<UITableViewCell> (statCellList, new NSString("SimpleStatCell"), 40.0f, (cell) => {
 				var sCell = (SimpleStatCell)cell;
 				sCell.BindToViewModel();
 			});
 
-			sectionInfo.Header = new TableSectionHeader (() => {
-				var header = new UITableViewHeaderFooterView ();
-				header.TextLabel.Text = headerText;
-				header.ContentView.BackgroundColor = new UIColor(0.9f, 0.9f, 0.9f, 1.0f);
-				return header;
-			}, 50.0f);
+			if (useHeader) {
+				sectionInfo.Header = new TableSectionHeader (() => {
+					var header = new UITableViewHeaderFooterView ();
+					header.TextLabel.Text = headerText;
+					header.ContentView.BackgroundColor = new UIColor (0.9f, 0.9f, 0.9f, 1.0f);
+					return header;
+				}, 50.0f);
+			}
 
 			return sectionInfo;
 		}
