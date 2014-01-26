@@ -4,6 +4,7 @@ using PFAssist.Core;
 using ReactiveUI.Cocoa;
 using ReactiveUI;
 using MonoTouch.Foundation;
+using System.Drawing;
 
 namespace PFAssist.UI.iOS
 {
@@ -45,79 +46,90 @@ namespace PFAssist.UI.iOS
 			dataLabel.Text = DataObject.Name.Value;
 
 			dataTable.Source = TableViewSource = new ReactiveTableViewSource (this.dataTable);
+
 			TableViewSource.Data = new ReactiveList<TableSectionInformation<UITableViewCell>>(new [] {
 				MakeSection("ARMOR", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("Armor", DataObject.ArmorClass.Total),
-					new SimpleStatViewModel("Touch", DataObject.ArmorClass.TouchTotal),
-					new SimpleStatViewModel("Flat Footed", DataObject.ArmorClass.FlatFootedTotal)
+					new SimpleStatViewModel("Armor", DataObject.ArmorClass.Total)
 				})),
 				MakeSection("SAVES", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("Fortitude", DataObject.Saves.Fortitude.Total),
-					new SimpleStatViewModel("Reflex", DataObject.Saves.Reflex.Total),
-					new SimpleStatViewModel("Will", DataObject.Saves.Will.Total)
+					new SimpleStatViewModel("Fortitude", DataObject.Saves.Fortitude.Total)
 				})),
 				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-
-				// Duplicating this section to verify that scrolling works
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
-				})),
-				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
-					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
-					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
-					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
-					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One)
 				}))
+
+//				MakeSection("ARMOR", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("Armor", DataObject.ArmorClass.Total),
+//					new SimpleStatViewModel("Touch", DataObject.ArmorClass.TouchTotal),
+//					new SimpleStatViewModel("Flat Footed", DataObject.ArmorClass.FlatFootedTotal)
+//				})),
+//				MakeSection("SAVES", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("Fortitude", DataObject.Saves.Fortitude.Total),
+//					new SimpleStatViewModel("Reflex", DataObject.Saves.Reflex.Total),
+//					new SimpleStatViewModel("Will", DataObject.Saves.Will.Total)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//
+//				// Duplicating this section to verify that scrolling works
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				})),
+//				MakeSection("ATTACK", new ReactiveList<SimpleStatViewModel> (new [] {
+//					new SimpleStatViewModel("1st Base Attack", DataObject.AttackBonus.One),
+//					new SimpleStatViewModel("2nd Base Attack", DataObject.AttackBonus.Two),
+//					new SimpleStatViewModel("3rd Base Attack", DataObject.AttackBonus.Three),
+//					new SimpleStatViewModel("4th Base Attack", DataObject.AttackBonus.Four)
+//				}))
 			});
 
 			dataTable.BackgroundColor = UIColor.Clear;
@@ -125,9 +137,9 @@ namespace PFAssist.UI.iOS
 
 		private TableSectionInformation<UITableViewCell> MakeSection(String headerText, ReactiveList<SimpleStatViewModel> statCellList)
 		{
-			var sectionInfo = new TableSectionInformation<UITableViewCell> (statCellList, new NSString("SimpleStatViewCell"), 40.0f, (cell) => {
-				var sCell = (SimpleStatViewCell)cell;
-				sCell.BindToViewModel();
+			var sectionInfo = new TableSectionInformation<UITableViewCell> (statCellList, new NSString("StatSummaryViewCell"), 100.0f, (cell) => {
+//				var sCell = (SimpleStatViewCell)cell;
+//				sCell.BindToViewModel();
 			});
 
 			sectionInfo.Header = new TableSectionHeader (() => {
