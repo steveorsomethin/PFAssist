@@ -160,6 +160,7 @@
       <DependentUpon>SimpleStatViewCell.cs</DependentUpon>
     </Compile>
     <Compile Include="EditableViewCell.cs" />
+    <Compile Include="StatSummaryViewCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
