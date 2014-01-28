@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="EditableViewCell.cs" />
     <Compile Include="StatSummaryViewCell.cs" />
+    <Compile Include="ViewModels\ReactiveViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
