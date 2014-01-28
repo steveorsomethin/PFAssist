@@ -161,6 +161,8 @@
     </Compile>
     <Compile Include="EditableViewCell.cs" />
     <Compile Include="StatSummaryViewCell.cs" />
+    <Compile Include="Views\ReactiveTableViewCell.cs" />
+    <Compile Include="Views\TextInputTableViewCell.cs" />
     <Compile Include="ViewModels\ReactiveViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -177,5 +179,6 @@
   <ItemGroup>
     <Folder Include="ViewModels\" />
     <Folder Include="ViewControllers\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 </Project>
