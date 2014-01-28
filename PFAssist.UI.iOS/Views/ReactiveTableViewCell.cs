@@ -2,7 +2,7 @@ using System;
 using ReactiveUI.Cocoa;
 using ReactiveUI;
 
-namespace PFAssist.UI.iOS.Views
+namespace PFAssist.UI.iOS
 {
 	public abstract class ReactiveTableViewCell<TViewModel> : ReactiveTableViewCell, IViewFor<TViewModel>
 		where TViewModel : class

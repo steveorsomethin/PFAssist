@@ -3,7 +3,7 @@ using ReactiveUI.Cocoa;
 using MonoTouch.UIKit;
 using System.Drawing;
 
-namespace PFAssist.UI.iOS.Views
+namespace PFAssist.UI.iOS
 {
 	public class TextInputTableViewCell<TViewModel> : ReactiveTableViewCell<TViewModel>
 		where TViewModel : class
