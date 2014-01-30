@@ -4,7 +4,7 @@ using PFAssist.Core;
 
 namespace PFAssist.UI.iOS
 {
-	public class ReactiveViewModel<T> : ReactiveObject
+	public abstract class ReactiveViewModel<T> : ReactiveObject
 	{
 		public string Description {
 			get;
