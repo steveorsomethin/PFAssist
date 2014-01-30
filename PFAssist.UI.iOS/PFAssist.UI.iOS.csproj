@@ -164,6 +164,7 @@
     <Compile Include="Views\ReactiveTableViewCell.cs" />
     <Compile Include="Views\TextInputTableViewCell.cs" />
     <Compile Include="ViewModels\ReactiveViewModel.cs" />
+    <Compile Include="ViewModels\CharacterDetailViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />
