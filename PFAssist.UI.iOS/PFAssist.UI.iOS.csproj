@@ -167,6 +167,7 @@
     <Compile Include="ViewModels\CharacterDetailViewModel.cs" />
     <Compile Include="ViewControllers\CharacterDetailViewController.cs" />
     <Compile Include="ViewControllers\ReactiveTableViewController.cs" />
+    <Compile Include="ViewControllers\ReactiveViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="MainStoryboard_iPhone.storyboard" />

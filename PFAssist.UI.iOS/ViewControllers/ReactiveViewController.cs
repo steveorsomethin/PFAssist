@@ -3,12 +3,12 @@ using ReactiveUI;
 
 namespace PFAssist.UI.iOS
 {
-	public class ReactiveTableViewController<T> : ReactiveUI.Cocoa.ReactiveTableViewController, IViewFor<T>
+	public class ReactiveViewController<T> : ReactiveUI.Cocoa.ReactiveViewController, IViewFor<T>
 		where T : class
 	{
 		private T viewModel;
 
-		public ReactiveTableViewController (IntPtr handle)
+		public ReactiveViewController (IntPtr handle)
 			: base (handle)
 		{
 		}
@@ -39,5 +39,5 @@ namespace PFAssist.UI.iOS
 
 		#endregion
 	}
+	
 }
-
